@@ -42,7 +42,7 @@ export default function Products(props) {
       <h2>What kind of edit do you need?</h2>
       <form className="ProductForm" id="prodcut-form">
         <select value={description ? description : ''} className="ProductSelectInput" onChange={handleChange}>
-          <option value='' key='none'>Select a product</option>
+          <option value='' key='none'>Select an Edit</option>
           {products ? products.map(item => <option value={item.description} key={item.description}>{item.description}</option>) : null}
         </select>
       </form>

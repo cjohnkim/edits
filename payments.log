@@ -26,3 +26,5 @@
 2020-12-13 14:42:26.039 INFO  [PAYMENT INTENT SUCCESS: pi_1Hy0SZKk2PsQrz8JNHyXOQxR AMOUNT: 10000] 
 2020-12-13 14:43:32.158 INFO  [create-payment-intent] SUCCESS OrderId: 1385-000311-0294 Payment: {"description":"100 words for $100","price":100,"currency":"USD","name":"john kim","email":"badwam@gmail.com"} 
 2020-12-13 14:43:34.396 INFO  [PAYMENT INTENT SUCCESS: pi_1Hy0TgKk2PsQrz8JZGr3xi7Q AMOUNT: 10000] 
+2020-12-13 14:49:25.962 INFO  [create-payment-intent] SUCCESS OrderId: 1385-000234-9589 Payment: {"description":"100 words for $100","price":100,"currency":"USD","name":"John Kim","email":"badwam@gmail.com"} 
+2020-12-13 14:49:26.720 INFO  [create-payment-intent] SUCCESS OrderId: 1385-000233-7064 Payment: {"description":"100 words for $100","price":100,"currency":"USD","name":"John Kim","email":"badwam@gmail.com"} 
