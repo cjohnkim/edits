@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useState} from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import Products from "./Products";
 import "./App.css";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // loadStripe is initialized with your real test publishable API key.
-const promise = loadStripe("pk_test_51HxMHTKk2PsQrz8JtemMEU8RNuxbQ1RhoFhSENIny09adPpyC9nHcSQIRvLXO81F8IOnDtkRonS67rF3UHwodl5M00mAFUERno");
+//const promise = loadStripe("pk_test_51HxMHTKk2PsQrz8JtemMEU8RNuxbQ1RhoFhSENIny09adPpyC9nHcSQIRvLXO81F8IOnDtkRonS67rF3UHwodl5M00mAFUERno");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 export default function App() {
+
+  const [productPrice, setProductPrice] = useState(0);
+  const [productDescription, setProductDescription] = useState('');
+
+  const handleProductSelection = (description, price) => {
+    setProductPrice(price);
+    setProductDescription(description);
+  }
+
   return (
     <div className="App">
-      <Elements stripe={promise}>
-        <CheckoutForm />
-      </Elements>
+      <div id="product">
+        <h1>Purchase Edits</h1>
+        <h2>Get help with important messages before you hit send</h2>
+        <div className="Products">
+          <Products onProductSelection={handleProductSelection}/>
+        </div>
+      </div>        
+        <div className="CardForm">
+          <Elements stripe={stripePromise}>
+            <CheckoutForm price={productPrice} description={productDescription}/>
+          </Elements>
+        </div>
     </div>
   );
 }
