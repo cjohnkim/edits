@@ -1,0 +1,8 @@
+2020-12-13 22:04:20.089 INFO  [create-payment-intent] SUCCESS OrderId: 6907-268082-0376 Payment: {"description":"100 words for $100","price":100,"currency":"USD","name":"John Kim","email":"adf@gmail.com"} 
+2020-12-13 22:04:30.667 INFO  [webhook] OrderId: 6907-268082-0376 Payment captured. 
+2020-12-13 22:04:53.950 INFO  [create-payment-intent] SUCCESS OrderId: 6907-268025-9119 Payment: {"description":"1000 words for $800","price":800,"currency":"USD","name":"af","email":"adsf@stripe.com"} 
+2020-12-13 22:05:00.510 INFO  [webhook] OrderId: 6907-268025-9119 Payment failed. 
+2020-12-13 22:05:02.212 INFO  [create-payment-intent] SUCCESS OrderId: 6907-268606-2497 Payment: {"description":"1000 words for $800","price":800,"currency":"USD","name":"af","email":"adsf@stripe.com"} 
+2020-12-13 22:05:09.682 INFO  [webhook] OrderId: 6907-268606-2497 Payment captured. 
+2020-12-13 22:05:48.083 INFO  [create-payment-intent] SUCCESS OrderId: 6907-268637-4613 Payment: {"description":"1000 words for $800","price":800,"currency":"USD","name":"dsaf","email":"asdf@stripe.com"} 
+2020-12-13 22:05:50.206 INFO  [webhook] OrderId: 6907-268637-4613 Payment failed. 

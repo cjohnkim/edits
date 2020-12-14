@@ -51,16 +51,16 @@ order-id
   * If you see an error like `ReferenceError: express is not defined`, then you may need to install a node package.
 
 ## logging
-* This project logs payment creations from the server as well as successful payments calls from stripe to our webhook endpoint.
+* This project logs payment creations from the server as well as successful payment calls from stripe to our webhook endpoint.
 * You can view log entries in the `payments.log` file in the root directory of the project.
 
 ## webhooks
 
 ### stripe cli
 
-To test webhook calls, you can install the [Stripe SLI](https://stripe.com/docs/cli) and initiate calls from your terminal. I did not have luck with this for #reasons (xcode wouldn't install which blocked updating homebrew which blocked downloading via a package manager and then ran into issues with the direct download of the stripe cli due to being on a mac (or due to my lack of understanding)).
+To test webhook calls, you can install the [Stripe CLI](https://stripe.com/docs/cli) and initiate calls from your terminal. I did not have luck with this for #reasons (xcode wouldn't install which blocked updating homebrew which blocked downloading via a package manager and then ran into issues with the direct download of the stripe cli due to being on a mac (or due to my lack of understanding)).
 
-Here's the stripe docs page for using the stripe cli to [listen to webhook events](https://stripe.com/docs/stripe-cli/webhooks). I have not been able to validate these steps myself.
+Here's the stripe docs page for using the stripe CLI to [listen to webhook events](https://stripe.com/docs/stripe-cli/webhooks). I have not been able to validate these steps myself.
 
 * You might try starting with: `stripe listen --forward-to http://localhost:4242/webhook`
 
@@ -70,31 +70,31 @@ Alternatively, you can use [ngrok](https://ngrok.com/) to publicly expose your l
 
 * After installing ngrok, open your Terminal and start ngrok with: `ngrok http 3000 -host-header="localhost:3000"`
 * In the ngrok console in your Terminal, you'll see public URL's that will forward to your local server.
-  * Note: By default this URL will expire after 8 hours.
+  * Note: By default this ngrok URL assignment will expire after 8 hours.
 * Copy the forwarding URL provided to you by ngrok, something like: `http://9853bd6f75de.ngrok.io` and go to the stripe Developers [webhooks page](https://dashboard.stripe.com/test/webhooks).
 * Click "Add endpoint"
-* In "Endpoint URL" insert the ngrok forwarding URL followed by `/webhook`
-  * In our ngrok URL example above, we'd use: `http://9853bd6f75de.ngrok.io/webhook`
-* In "Events to Send" section, you can click the `receive all events` link.
+* In "Endpoint URL" paste the ngrok forwarding URL followed by `/webhook`
+  * In our ngrok URL example above, we'd paste: `http://9853bd6f75de.ngrok.io/webhook`
+* In the "Events to Send" section, click the `receive all events` link.
 * Click "Add Endpoint".
 
-Events that start a webhook call should now be directed to your ngrok URL which in turn should call your local server's `/webhook` endpoint.
+Events that start a webhook call will route to your ngrok forwarding URL which in turn will call your local app server's `/webhook` endpoint.
 
-# run!
+# run
 
 The fun part... finally!
 
-* Run ngrok and be sure your stripe account sends webhook events to your ngrok URL
-* From the root directory of the project run `npm start`
-* Your browser should now launch [http://localhost:3000](http://localhost:3000) on its own. If it doesn't, go there manually.
+* Run ngrok and be sure your stripe account sends webhook events to your ngrok forwarding URL
+* From the root directory of this project run `npm start`
+* Your browser will launch [http://localhost:3000](http://localhost:3000).
 
 ## make a purchase
 
-As a reminder, this is a demo app and you cannot actually purchase edits.
+As a reminder, this is a demo app and you can't (yet) purchase edits.
 
-To test purchases, you can use [test cards from stripe](https://stripe.com/docs/payments/accept-a-payment#web-test-integration)
+To test purchases, use [a test card from stripe](https://stripe.com/docs/payments/accept-a-payment#web-test-integration)
 
-Different card numbers will trigger different payment outcomes. `4242 4242 4242 4242` will bring you to the land of success. Make sure to use an expiration date that is in the future. CVV and Zip code will accept anything you'd like to enter.
+Different card numbers will trigger different payment outcomes. `4242 4242 4242 4242` will bring you to the land of success. Make sure to use an expiration date that is in the future. CVV and zip code will accept any digits you'd like to enter.
 
 # thank you!
 
