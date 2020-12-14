@@ -1,6 +1,6 @@
 # Overview
 
-This is a working demonstration of a stripe PaymentsIntent integration built with a [Custom Payment Flow](https://stripe.com/docs/payments/integration-builder).
+This is a working demonstration of a [stripe](https://stripe.com) PaymentsIntent integration built with a [Custom Payment Flow](https://stripe.com/docs/payments/integration-builder).
 
 In this simple ecommerce application, a seller provides editing services. Purchasers can select the editing service they'd like and make a payment to hire an editor. 
 
