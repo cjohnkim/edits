@@ -2,7 +2,8 @@ const express = require("express");
 // const app = express();
 const { resolve } = require("path");
 // This is your real test secret API key.
-const stripe = require("stripe")("sk_test_51HxMHTKk2PsQrz8J8ygOOZnlDg1omFDVp2zfwMUXoGQAhqhXyTzXOuF0SVW0QWtqgHf2E0XxlF1XiRlDl16wa0TT00DUNr2hrC");
+const env = require("dotenv").config({ path: "./.env" });
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const app = require('express')();
 // Use body-parser to retrieve the raw body as a buffer
 const bodyParser = require('body-parser');
@@ -20,7 +21,7 @@ log = SimpleNodeLogger.createSimpleLogger( opts );
 // note: in production, this would come from a DB
 const products = [
   { description: "100 words for $100", price: 100.00 },
-  { description: "500 words for $400", price: 500.00 },
+  { description: "500 words for $400", price: 400.00 },
   { description: "1000 words for $800", price: 800.00 },
   { description: "1 hour of co-editing $1000", price: 1000.00 },
 ];
@@ -63,6 +64,7 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, respo
     return response.send();
   }
 
+  const orderId = event.data.object.metadata.orderId;
   // Handle the event
   switch (event.type) {
     case 'payment_intent.succeeded':
@@ -70,8 +72,11 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, respo
       console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
       // Then define and call a method to handle the successful payment intent.
       // handlePaymentIntentSucceeded(paymentIntent);
-      log.info("[create-payment-intent] SUCCESS OrderId: ", orderId, " Payment: ", req.body);
+      log.info("[webhook] OrderId: ", orderId, " Payment captured.");
       break;
+    case 'payment_intent.payment_failed':
+      log.info("[webhook] OrderId: ", orderId, " Payment failed.");
+      break;    
     case 'payment_method.attached':
       const paymentMethod = event.data.object;
       // Then define and call a method to handle the successful attachment of a PaymentMethod.
@@ -87,13 +92,6 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, respo
     
 app.use(express.static("."));
 app.use(express.json());
-
-const calculateOrderAmount = items => {
-  // Replace this constant with a calculation of the order's amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return 1400;
-};
 
 app.post("/create-payment-intent", async (req, res) => {
   const { description, price, currency, name, email } = req.body;

@@ -217,7 +217,7 @@ export default function CheckoutForm(props) {
           <div className="Error">
             <span id="card-form-error"></span>
           </div>
-            <button disabled={!stripe || processingOrder} className="OrderButton">Place order</button>
+            <button disabled={!stripe || disabled || processingOrder} className="OrderButton">Place order</button>
         </form>
       </div>
 

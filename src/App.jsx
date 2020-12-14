@@ -8,7 +8,7 @@ import "./App.css";
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // loadStripe is initialized with your real test publishable API key.
-//const promise = loadStripe("pk_test_51HxMHTKk2PsQrz8JtemMEU8RNuxbQ1RhoFhSENIny09adPpyC9nHcSQIRvLXO81F8IOnDtkRonS67rF3UHwodl5M00mAFUERno");
+require("dotenv").config({ path: "./.env" });
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 export default function App() {
